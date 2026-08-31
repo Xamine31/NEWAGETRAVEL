@@ -1,21 +1,21 @@
-# New Age Travel France — site dynamique
+# New Age Travel France — V6
 
-Site multi-pages compatible GitHub Pages.
+Version dynamique GitHub Pages, sans espace administration pour le moment.
 
-## Mise en ligne
+## Améliorations V6
+- Accueil plus immersif et plus commercial
+- Recherche par destination, univers et budget
+- Filtres dynamiques sur la page Destinations
+- Favoris enregistrés dans le navigateur
+- Fiches voyage plus complètes avec partage de lien
+- Formulaire de demande en 3 étapes
+- Barre d’actions mobile fixe : Appeler / Voyages / Devis
+- Responsive PC, tablette et mobile retravaillé
+- Métadonnées SEO et données structurées TravelAgency
+- Contrastes et positionnement des boutons harmonisés
 
-Copiez tous les fichiers de ce dossier à la racine du dépôt GitHub, puis activez GitHub Pages dans **Settings → Pages → Deploy from a branch → main → /(root)**.
+## GitHub Pages
+Copiez directement tout le contenu de ce dossier à la racine du dépôt puis activez Settings > Pages > Deploy from a branch > main > /(root).
 
-## Modifier le contenu
-
-Les destinations, offres et actualités se trouvent dans `data.json`. Les visuels se trouvent dans `assets/`.
-
-## Pages
-
-- `index.html` — Accueil
-- `destinations.html` — Destinations
-- `offres.html` — Offres
-- `voyage.html?id=...` — Fiche détaillée d’un séjour
-- `publications.html` — Actualités
-- `agence.html` — L’agence
-- `contact.html` — Contact
+## Données
+Les voyages, destinations et publications sont gérés dans `data.json`.
