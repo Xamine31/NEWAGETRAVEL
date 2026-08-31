@@ -1,0 +1,75 @@
+{
+  "agency": {
+    "name": "New Age Travel France",
+    "city": "Marseille",
+    "address": "212 avenue de la Capelette, 13010 Marseille, France",
+    "phone": "04 65 85 93 50"
+  },
+  "destinations": [
+    {
+      "id": "cairo",
+      "name": "Le Caire",
+      "region": "Afrique",
+      "category": "afrique",
+      "image": "assets/cairo.jpg",
+      "description": "Pyramides, Nil, Khan El Khalili et patrimoine égyptien.",
+      "price": "À partir de 999 €*"
+    },
+    {
+      "id": "omra",
+      "name": "La Mecque · Médine · Jeddah",
+      "region": "Voyage spirituel",
+      "category": "spirituel",
+      "image": "assets/umrah-combine.jpg",
+      "description": "Programme spirituel combiné présenté dans les publications fournies.",
+      "price": "À partir de 1 680 €*"
+    },
+    {
+      "id": "tunisia",
+      "name": "Tunisie",
+      "region": "Méditerranée",
+      "category": "mediterranee",
+      "image": "assets/companies.jpg",
+      "description": "Destination méditerranéenne accessible depuis Marseille selon programme.",
+      "price": "Sur demande"
+    }
+  ],
+  "offers": [
+    {
+      "id": "cairo-offer",
+      "title": "Le Caire",
+      "date": "Novembre",
+      "image": "assets/cairo.jpg",
+      "price": "À partir de 999 €*",
+      "text": "8 jours / 7 nuits · départ de Marseille · vol, hôtel et transfert selon la publication."
+    },
+    {
+      "id": "umrah-offer",
+      "title": "Omra combinée",
+      "date": "Octobre 2026",
+      "image": "assets/umrah-combine.jpg",
+      "price": "À partir de 1 680 €*",
+      "text": "Marseille · Tunis · Terre Sainte, avec La Mecque, Médine et Jeddah selon la publication."
+    }
+  ],
+  "posts": [
+    {
+      "date": "20 août",
+      "title": "Omra octobre 2026",
+      "image": "assets/umrah-combine.jpg",
+      "text": "Voyage combiné Marseille · Tunis · Terre Sainte."
+    },
+    {
+      "date": "18 mai",
+      "title": "Découvrez la magie du Caire",
+      "image": "assets/cairo.jpg",
+      "text": "Une escapade entre pyramides, Nil et patrimoine égyptien."
+    },
+    {
+      "date": "26 sept. 2023",
+      "title": "Compagnies partenaires",
+      "image": "assets/companies.jpg",
+      "text": "Un aperçu des compagnies présentées par New Age Travel France."
+    }
+  ]
+}
