@@ -39,3 +39,6 @@ python -m http.server 5500
 Puis : `http://localhost:5500/`
 
 Administration : `http://localhost:5500/administration/`
+
+## Images depuis l'administration
+La V11 utilise le bucket Supabase Storage `site-images`. Pour un projet Supabase déjà configuré avec la V10, exécuter une seule fois `supabase/storage.sql` dans SQL Editor. Ensuite les formulaires Destinations, Voyages et Publications permettent l'import direct d'images. La galerie des voyages accepte plusieurs fichiers.
