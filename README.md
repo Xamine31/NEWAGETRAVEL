@@ -46,3 +46,10 @@ La V11 utilise le bucket Supabase Storage `site-images`. Pour un projet Supabase
 
 ## Mise à la une (V12)
 Pour une base Supabase déjà configurée en V11, exécuter `supabase/featured-home.sql` une seule fois. L’administration permet ensuite de choisir un seul voyage ou une seule publication à afficher dans le visuel principal de l’accueil.
+
+
+## V12.3 — À la une depuis les listes
+- La case **À la une** est directement visible dans les listes **Destinations** et **Voyages**.
+- Une seule case peut être active à la fois, même entre les deux listes.
+- Les publications ne peuvent plus être mises à la une.
+- Si V12 featured-home.sql a déjà été exécuté, exécuter `supabase/featured-home-v12.3.sql` une fois.

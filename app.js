@@ -31,9 +31,9 @@ function visibleDestinations(){return (DATA.destinations||[]).filter(active)}
 function visibleOffers(){return (DATA.offers||[]).filter(active)}
 function homepageFeature(){
   const setting=DATA.homepageFeatured||null;
-  if(setting?.featured_type==='publication'){
-    const item=(DATA.posts||[]).find(x=>active(x)&&x.id===setting.featured_id);
-    if(item)return {type:'publication',item};
+  if(setting?.featured_type==='destination'){
+    const item=visibleDestinations().find(x=>x.id===setting.featured_id);
+    if(item)return {type:'destination',item};
   }
   if(setting?.featured_type==='voyage'){
     const item=visibleOffers().find(x=>x.id===setting.featured_id);
@@ -45,9 +45,9 @@ function homepageFeature(){
 function homepageFeatureCard(){
   const f=homepageFeature();
   if(!f)return `<div class="hero-card reveal"><img src="${asset('assets/cairo.jpg')}" alt="Voyage"><div class="hero-float">Découvrez nos voyages</div></div>`;
-  if(f.type==='publication'){
-    const p=f.item,href=(p.offerId||p.destinationId)?postHref(p):route('actualites');
-    return `<a class="hero-card hero-card-link reveal" href="${href}"><span class="hero-feature-label">Actualité à la une</span><img src="${asset(p.image)}" alt="${esc(p.title)}"><div class="hero-float"><strong>${esc(p.title)}</strong>${p.date?`<small>${esc(p.date)}</small>`:''}</div></a>`;
+  if(f.type==='destination'){
+    const d=f.item;
+    return `<a class="hero-card hero-card-link reveal" href="${route('destination','?id='+encodeURIComponent(d.id))}"><span class="hero-feature-label">Destination à la une</span><img src="${asset(d.image)}" alt="${esc(d.name)}"><div class="hero-float"><strong>${esc(d.name)}</strong><small>${esc(d.price||d.region||'')}</small></div></a>`;
   }
   const o=f.item;
   return `<a class="hero-card hero-card-link reveal" href="${route('voyage','?id='+encodeURIComponent(o.id))}"><span class="hero-feature-label">Voyage à la une</span><img src="${asset(o.image)}" alt="${esc(o.title)}"><div class="hero-float"><strong>${esc(o.title)}</strong><small>${esc(o.price||o.date||'')}</small></div></a>`;

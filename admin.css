@@ -37,3 +37,9 @@
 
 /* V12 — mise à la une */
 .featured-pill{background:#fff3cd;color:#8a5a00;margin-left:6px;vertical-align:middle}.featured-switch-row{margin-top:12px;padding:16px 0;border-top:1px solid #edf1f5;border-bottom:1px solid #edf1f5}
+
+/* V12.3 — sélection À la une directement depuis les listes */
+.featured-list-check{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;color:#344054}
+.featured-list-check input{width:18px;height:18px;accent-color:#175cd3;cursor:pointer}
+.featured-list-check:has(input:checked){color:#175cd3}
+.featured-list-check input:disabled{cursor:wait;opacity:.65}

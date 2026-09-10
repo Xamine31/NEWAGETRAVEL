@@ -3,7 +3,7 @@
 
 create table if not exists public.site_settings (
   key text primary key,
-  featured_type text check (featured_type in ('voyage','publication') or featured_type is null),
+  featured_type text check (featured_type in ('voyage','destination') or featured_type is null),
   featured_id text,
   updated_at timestamptz not null default now()
 );
