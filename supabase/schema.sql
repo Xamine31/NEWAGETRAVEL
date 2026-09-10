@@ -79,6 +79,18 @@ create table if not exists public.quote_requests (
   created_at timestamptz not null default now()
 );
 
+
+create table if not exists public.site_settings (
+  key text primary key,
+  featured_type text check (featured_type in ('voyage','publication') or featured_type is null),
+  featured_id text,
+  updated_at timestamptz not null default now()
+);
+
+insert into public.site_settings(key, featured_type, featured_id)
+values ('homepage', 'voyage', 'cairo-offer')
+on conflict (key) do nothing;
+
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
@@ -116,6 +128,7 @@ alter table public.destinations enable row level security;
 alter table public.voyages enable row level security;
 alter table public.publications enable row level security;
 alter table public.quote_requests enable row level security;
+alter table public.site_settings enable row level security;
 
 -- Profils : l'utilisateur voit son profil, un admin voit tous les profils.
 drop policy if exists "profile own or admin read" on public.profiles;
@@ -166,6 +179,16 @@ drop policy if exists "admin delete quote requests" on public.quote_requests;
 create policy "admin delete quote requests" on public.quote_requests
 for delete to authenticated using (public.is_admin());
 
+
+-- Réglages publics du site : lecture publique, modification réservée aux administrateurs.
+drop policy if exists "public read site settings" on public.site_settings;
+create policy "public read site settings" on public.site_settings
+for select using (true);
+
+drop policy if exists "admin manage site settings" on public.site_settings;
+create policy "admin manage site settings" on public.site_settings
+for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
 -- Met à jour automatiquement updated_at.
 create or replace function public.touch_updated_at()
 returns trigger language plpgsql as $$
@@ -189,10 +212,10 @@ create trigger publications_touch_updated_at before update on public.publication
 for each row execute procedure public.touch_updated_at();
 
 -- Privilèges API minimaux ; RLS reste la barrière d'autorisation.
-grant select on public.destinations, public.voyages, public.publications to anon, authenticated;
+grant select on public.destinations, public.voyages, public.publications, public.site_settings to anon, authenticated;
 grant insert on public.quote_requests to anon, authenticated;
 grant select, update, delete on public.quote_requests to authenticated;
-grant all on public.destinations, public.voyages, public.publications to authenticated;
+grant all on public.destinations, public.voyages, public.publications, public.site_settings to authenticated;
 grant select on public.profiles to authenticated;
 
 -- Stockage des images (également disponible séparément dans supabase/storage.sql).

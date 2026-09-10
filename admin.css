@@ -22,6 +22,8 @@
 .admin-image-uploader{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:center;padding:14px;border:1px solid #dfe7f0;border-radius:16px;background:#f9fbfd}
 .admin-image-preview{width:150px;aspect-ratio:4/3;border-radius:13px;overflow:hidden;background:#eaf0f6;border:1px solid #dce5ee}
 .admin-image-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.admin-image-empty{width:100%;height:100%;display:grid;place-items:center;padding:12px;text-align:center;color:#718198;font-size:13px;font-weight:700}
+.admin-image-preview [hidden],.admin-image-controls [hidden]{display:none!important}
 .admin-image-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.admin-image-controls small{width:100%;color:#718198;font-size:12px}
 .admin-file-input{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important}
 .admin-upload-btn{width:auto!important;cursor:pointer}
@@ -32,3 +34,6 @@
 .admin-gallery-item button{position:absolute;right:7px;top:7px;width:29px;height:29px;border:0;border-radius:50%;background:rgba(7,29,59,.86);color:#fff;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .admin-gallery-empty{grid-column:1/-1;padding:22px;border:1px dashed #cbd7e3;border-radius:13px;text-align:center;color:#718198;background:#fbfcfe}
 @media(max-width:560px){.admin-image-uploader{grid-template-columns:1fr}.admin-image-preview{width:100%;max-width:260px}.admin-image-controls{align-items:stretch}.admin-image-controls .admin-btn,.admin-gallery-actions .admin-btn{width:100%!important}.admin-gallery-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* V12 — mise à la une */
+.featured-pill{background:#fff3cd;color:#8a5a00;margin-left:6px;vertical-align:middle}.featured-switch-row{margin-top:12px;padding:16px 0;border-top:1px solid #edf1f5;border-bottom:1px solid #edf1f5}
