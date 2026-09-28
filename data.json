@@ -1,10 +1,16 @@
 {
   "agency": {
-    "name": "New Age Travel France",
-    "city": "Marseille",
+    "name": "New Age Travel",
+    "city": "",
     "address": "Marseille, France",
     "phone": "04 65 85 93 50",
-    "phoneHref": "+33465859350"
+    "phoneHref": "+33465859350",
+    "socials": {
+      "facebook": "",
+      "instagram": "",
+      "tiktok": "",
+      "youtube": ""
+    }
   },
   "destinations": [
     {
@@ -16,7 +22,7 @@
       "description": "Une immersion au cœur du Caire, entre patrimoine millénaire, Nil et ambiance orientale.",
       "price": "À partir de 999 €",
       "duration": "8 jours / 7 nuits",
-      "departure": "Marseille",
+      "departure": "",
       "highlights": [
         "Pyramides et patrimoine du Caire",
         "Séjour hôtelier",
@@ -35,10 +41,10 @@
       "region": "Voyage spirituel",
       "category": "spirituel",
       "image": "assets/umrah-combine.jpg",
-      "description": "Un voyage spirituel au départ de Marseille, avec un itinéraire combiné incluant Tunis et les villes saintes.",
+      "description": "Un voyage spirituel , avec un itinéraire combiné incluant Tunis et les villes saintes.",
       "price": "À partir de 1 680 €",
       "duration": "Programme octobre 2026",
-      "departure": "Marseille",
+      "departure": "",
       "highlights": [
         "La Mecque",
         "Médine",
@@ -58,12 +64,12 @@
       "region": "Méditerranée",
       "category": "mediterranee",
       "image": "assets/companies.jpg",
-      "description": "Préparez votre voyage vers la Tunisie depuis Marseille avec l’accompagnement de l’agence.",
+      "description": "Préparez votre voyage vers la Tunisie  avec l’accompagnement de l’agence.",
       "price": "Sur demande",
       "duration": "Selon programme",
-      "departure": "Marseille",
+      "departure": "",
       "highlights": [
-        "Départs depuis Marseille",
+        "Accompagnement personnalisé",
         "Conseil personnalisé",
         "Solutions selon disponibilité"
       ],
@@ -79,13 +85,13 @@
       "id": "cairo-offer",
       "destinationId": "cairo",
       "title": "Le Caire",
-      "subtitle": "Égypte · séjour au départ de Marseille",
+      "subtitle": "Égypte · séjour",
       "date": "Novembre",
       "image": "assets/cairo.jpg",
       "price": "À partir de 999 €",
       "duration": "8 jours / 7 nuits",
-      "departure": "Marseille",
-      "text": "Partez à la découverte du Caire et de son patrimoine exceptionnel lors d’un séjour pensé au départ de Marseille.",
+      "departure": "",
+      "text": "Partez à la découverte du Caire et de son patrimoine exceptionnel lors d’un séjour pensé .",
       "included": [
         "Vol aller-retour selon programme",
         "Hébergement hôtelier",
@@ -109,13 +115,13 @@
       "id": "umrah-offer",
       "destinationId": "omra",
       "title": "Omra combinée",
-      "subtitle": "Marseille · Tunis · Terre Sainte",
+      "subtitle": "Tunis · Terre Sainte",
       "date": "Octobre 2026",
       "image": "assets/umrah-combine.jpg",
       "price": "À partir de 1 680 €",
       "duration": "Programme octobre 2026",
-      "departure": "Marseille",
-      "text": "Un itinéraire spirituel combiné au départ de Marseille, avec une étape à Tunis puis La Mecque, Médine et Jeddah.",
+      "departure": "",
+      "text": "Un itinéraire spirituel combiné , avec une étape à Tunis puis La Mecque, Médine et Jeddah.",
       "included": [
         "Itinéraire combiné selon programme",
         "Séjour à La Mecque et Médine",
@@ -142,7 +148,7 @@
       "date": "20 août",
       "title": "Omra octobre 2026",
       "image": "assets/umrah-combine.jpg",
-      "text": "Découvrez notre programme combiné au départ de Marseille vers Tunis et la Terre Sainte.",
+      "text": "New Age Travel vous accompagne dans la préparation de votre prochain voyage.",
       "id": "omra-octobre-2026",
       "active": true,
       "offerId": "umrah-offer",
@@ -160,9 +166,9 @@
     },
     {
       "date": "26 sept. 2023",
-      "title": "Voyager depuis Marseille",
+      "title": "Préparer votre prochain départ",
       "image": "assets/companies.jpg",
-      "text": "New Age Travel France vous accompagne dans la préparation de vos départs depuis Marseille.",
+      "text": "New Age Travel vous accompagne dans la préparation de votre prochain voyage.",
       "id": "voyager-depuis-marseille",
       "active": true,
       "destinationId": "tunisia"

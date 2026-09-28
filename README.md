@@ -1,4 +1,4 @@
-# New Age Travel France — Ultime V9 Supabase Ready
+# New Age Travel — Ultime V9 Supabase Ready
 
 Cette version garde le site public de la V8 et ajoute la vraie couche Supabase :
 

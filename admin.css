@@ -43,3 +43,9 @@
 .featured-list-check input{width:18px;height:18px;accent-color:#175cd3;cursor:pointer}
 .featured-list-check:has(input:checked){color:#175cd3}
 .featured-list-check input:disabled{cursor:wait;opacity:.65}
+
+/* V13 */
+.admin-date-row{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;padding:12px 0;border-bottom:1px solid #edf1f5}.admin-date-row:last-child{border-bottom:0}.admin-subcard{background:#f8fbfe;border:1px solid #e2eaf2;box-shadow:none}.admin-head-inline{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:10px}.admin-head-inline h3{margin:0}.admin-head-inline p{margin:4px 0 0}@media(max-width:700px){.admin-date-row{grid-template-columns:1fr}.admin-head-inline{align-items:flex-start;flex-direction:column}}
+
+/* V14 */
+.admin-itinerary-row{display:grid;grid-template-columns:90px 1fr 1.6fr auto;gap:10px;align-items:end;padding:12px;border:1px solid #e1e9f1;border-radius:14px;margin-bottom:10px;background:#fbfdff}.admin-promo-box{border-left:4px solid #ff6b4a;background:#fff8f4}.admin-price-preview{font-weight:900;color:#e95b3b}@media(max-width:800px){.admin-itinerary-row{grid-template-columns:1fr}}
