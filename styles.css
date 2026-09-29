@@ -110,8 +110,150 @@ body{background:radial-gradient(circle at 8% 12%,rgba(7,191,208,.14),transparent
 @media(max-width:650px){.hero{background:radial-gradient(circle at 85% 8%,rgba(255,189,63,.28),transparent 22%),linear-gradient(145deg,#03234c,#0758ad 56%,#08a9c4)}.section{padding:48px 0}.trip-config-section{background:linear-gradient(145deg,#e9f7ff,#f4efff 40%,#fff4df 72%,#eafbf7)}.trip-config-form,.voyage-summary{border-radius:22px}.mobile-bar{grid-template-columns:repeat(3,1fr);background:rgba(248,252,255,.96);border-color:rgba(8,111,232,.15)}.mobile-bar a:nth-child(2){background:#eef8ff}.mobile-bar a.primary{background:linear-gradient(120deg,#086fe8,#08bfd0)}}
 @media(prefers-reduced-motion:reduce){.promo-slider,.hero-badge{animation:none}.card{transition:none}}
 
-/* V18.1 — recherche voyages */
-.voyage-search-grid{grid-template-columns:minmax(0,1fr) auto;align-items:end}
-.voyage-search-main{min-width:0}
-.voyage-search-main input{width:100%}
-@media(max-width:700px){.voyage-search-grid{grid-template-columns:1fr}.voyage-search-grid .btn{width:100%}.voyage-search-panel{padding:16px}.results-line{gap:8px;align-items:flex-start;flex-wrap:wrap}}
+/* V18.3 — refonte mobile navigation + tailles */
+@media (max-width:920px){
+  .nav{position:sticky;top:0}
+  .nav .inner{height:72px;gap:12px}
+  .links.open{
+    inset:72px 0 0 0;
+    z-index:90;
+    padding:14px 14px calc(92px + env(safe-area-inset-bottom));
+    gap:7px;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    background:linear-gradient(155deg,#f8fcff,#eef8ff 38%,#f5f0ff 68%,#fff6e5);
+  }
+  .links.open>a:not(.btn){
+    min-height:46px;
+    margin:0;
+    padding:11px 14px;
+    border-radius:13px;
+    font-size:14px;
+    line-height:1.2;
+    flex:0 0 auto;
+  }
+  .links.open>.btn{min-height:48px;margin-top:2px;flex:0 0 auto;font-size:14px}
+}
+@media (max-width:650px){
+  html{font-size:15px}
+  body{padding-bottom:82px;overflow-x:hidden}
+  .container{width:calc(100% - 24px)}
+  .nav .inner{height:64px}
+  .brand{gap:9px;max-width:calc(100% - 54px)}
+  .brand img{width:40px;height:40px;flex:0 0 40px}
+  .brand span{font-size:14px;overflow:hidden;text-overflow:ellipsis}
+  .brand small{font-size:7px;letter-spacing:.07em}
+  .menu{width:42px;height:42px;flex:0 0 42px;border-radius:12px;font-size:21px}
+  .links.open{inset:64px 0 0 0;padding:12px 12px calc(88px + env(safe-area-inset-bottom));gap:6px}
+  .links.open>a:not(.btn){min-height:44px;padding:10px 13px;font-size:14px}
+  .links.open>.btn{min-height:46px;font-size:13px}
+
+  .page-hero{padding:38px 0 34px}
+  .page-hero h1{font-size:clamp(32px,10vw,40px)}
+  .section{padding:42px 0}
+  h2{font-size:clamp(27px,8.5vw,35px)}
+  .lead{font-size:14px}
+  .card-body{padding:17px}
+  .card-body h3{font-size:19px}
+  .card-media img{height:205px}
+  .price{font-size:21px}
+  .btn{min-height:44px;padding:10px 14px;font-size:12px}
+  .filters-panel{padding:10px;border-radius:17px}
+  .filter-control input,.filter-control select{height:43px;font-size:16px}
+
+  .mobile-bar{
+    left:6px;right:6px;
+    bottom:max(6px,env(safe-area-inset-bottom));
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:4px;padding:5px;
+    border-radius:16px;
+  }
+  .mobile-bar a{
+    min-width:0;min-height:54px;padding:5px 2px;
+    gap:1px;border-radius:11px;
+    font-size:9px;line-height:1.05;text-align:center;
+    white-space:normal;overflow-wrap:anywhere;
+  }
+  .mobile-bar a span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mobile-bar svg{width:17px;height:17px}
+  .footer{padding-bottom:36px}
+  .toast{bottom:78px}
+}
+@media (max-width:370px){
+  .brand small{display:none}
+  .brand span{font-size:13px}
+  .mobile-bar a{font-size:8px}
+  .card-media img{height:190px}
+}
+
+/* V18.5 — audit graphique et alignements */
+*,*::before,*::after{box-sizing:border-box}
+img,svg{max-width:100%}
+button,input,select,textarea{font:inherit}
+.card,.hero-card,.promo-slider,.voyage-slider,.voyage-summary,.trip-config-form{min-width:0}
+.card-body,.hero-float,.voyage-summary,.trip-config-form{overflow-wrap:anywhere}
+
+/* Flèches du slider promotions : chevrons CSS parfaitement centrés */
+.promo-prev,.promo-next{
+  display:flex;align-items:center;justify-content:center;
+  padding:0!important;line-height:1;font-size:0;
+  width:46px;height:46px;aspect-ratio:1;border-radius:50%;
+}
+.promo-prev::before,.promo-next::before{
+  content:"";display:block;width:11px;height:11px;
+  border-style:solid;border-color:currentColor;border-width:0 3px 3px 0;
+}
+.promo-prev::before{transform:translateX(2px) rotate(135deg)}
+.promo-next::before{transform:translateX(-2px) rotate(-45deg)}
+.promo-prev:focus-visible,.promo-next:focus-visible,.promo-dots button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* Cohérence générale des contrôles et cartes */
+.filters-grid>*{min-width:0}.filter-control input,.filter-control select{width:100%;max-width:100%}
+.card-media{overflow:hidden}.card-media img{display:block;width:100%;object-fit:cover}
+.hero-float{max-width:calc(100% - 28px)}
+.banner>*{min-width:0}
+
+@media(max-width:920px){
+  .links.open>a.active{border-radius:13px!important;padding-left:14px!important;padding-right:14px!important}
+  .links.open{max-width:100%;width:100%;box-sizing:border-box}
+  .voyage-grid,.hero .container{min-width:0}
+}
+@media(max-width:650px){
+  html,body{max-width:100%;overflow-x:hidden}
+  body{padding-bottom:78px}
+  .container{width:calc(100% - 24px);max-width:100%}
+  .hero .container{padding-top:44px;padding-bottom:68px}
+  .hero h1{font-size:clamp(34px,10.8vw,48px);line-height:1.02}
+  .hero p{font-size:14px;line-height:1.6}
+  .page-hero h1{font-size:clamp(30px,9.5vw,38px);line-height:1.05}
+  .section-head h2{font-size:clamp(26px,8vw,33px);line-height:1.08}
+  .promo-slider{min-height:330px;border-width:6px;border-radius:23px}
+  .promo-prev,.promo-next{width:40px;height:40px}
+  .promo-prev{left:10px}.promo-next{right:10px}
+  .promo-prev::before,.promo-next::before{width:9px;height:9px;border-width:0 2.5px 2.5px 0}
+  .promo-dots{right:14px;bottom:12px}
+  .promo-dots button{width:10px;height:10px}
+  .promo-slide .hero-float{left:12px;right:12px;bottom:36px;max-width:none}
+  .promo-slide .hero-feature-label{left:12px;top:12px}
+  .card-media img{height:200px}
+  .filters-grid{gap:9px}
+  .filters-panel{overflow:hidden}
+  .filter-control{min-width:0}
+  .filter-control input,.filter-control select{min-height:44px}
+  .voyage-slider{height:290px}
+  .voyage-summary h1{font-size:clamp(30px,9vw,36px)}
+  .step-actions{grid-template-columns:1fr;gap:8px}
+  .step-actions .btn{width:100%}
+  .mobile-bar{left:8px;right:8px;bottom:max(7px,env(safe-area-inset-bottom));padding:5px;gap:5px}
+  .mobile-bar a{min-height:52px;font-size:9px;padding:5px 3px}
+  .mobile-bar a span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.05}
+  .footer{padding-bottom:34px}
+}
+@media(max-width:370px){
+  .container{width:calc(100% - 18px)}
+  .hero h1{font-size:34px}
+  .promo-slider{min-height:300px}
+  .promo-prev,.promo-next{width:38px;height:38px}
+  .mobile-bar{left:5px;right:5px;gap:3px}
+  .mobile-bar a{font-size:8px;min-height:50px}
+}

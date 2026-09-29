@@ -2,7 +2,7 @@
   "agency": {
     "name": "New Age Travel",
     "city": "",
-    "address": "Marseille, France",
+    "address": "212 Avenue de la Capelette, 13010 Marseille",
     "phone": "04 65 85 93 50",
     "phoneHref": "+33465859350",
     "socials": {
@@ -10,7 +10,8 @@
       "instagram": "",
       "tiktok": "",
       "youtube": ""
-    }
+    },
+    "addressUrl": "https://www.bing.com/maps?mepi=0~~Embedded~Address_Link&ty=18&q=New%20Age%20Travel%20Marseille&ss=ypid.YN2D133672AC1BB961&ppois=43.27962875366211_5.410359859466553_New%20Age%20Travel%20Marseille_YN2D133672AC1BB961~&cp=43.279629~5.41036&v=2&sV=1&FORM=MPSRPL"
   },
   "destinations": [
     {
