@@ -57,3 +57,7 @@ body{background:radial-gradient(circle at 96% 5%,rgba(8,191,208,.10),transparent
 .admin-main,.main{background:transparent!important}
 button.primary,.btn-primary,.admin-btn-primary{background:linear-gradient(110deg,var(--v16-blue),var(--v16-cyan))!important;color:#fff!important}
 .admin-card,.panel,.stat-card{box-shadow:0 12px 34px rgba(3,44,92,.09)}
+/* V17 */
+.admin-sidebar{background:radial-gradient(circle at 20% 5%,rgba(8,191,208,.20),transparent 20%),linear-gradient(180deg,#031f44,#064d98 70%,#087aaf)}
+.admin-main{background:radial-gradient(circle at 90% 8%,rgba(255,189,63,.12),transparent 20%),linear-gradient(145deg,#f4faff,#f5f1ff 50%,#fff8e9)}
+.admin-card{border-color:rgba(8,111,232,.10)}.admin-btn-primary{background:linear-gradient(115deg,#086fe8,#08bfd0)}
