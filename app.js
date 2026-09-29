@@ -168,3 +168,24 @@ function shell(title,activePage,content){document.title=`${title} — New Age Tr
 function destinationCards(items){if(!items.length)return '<div class="empty">Aucune destination disponible pour le moment.</div>';return items.map((d,i)=>`<article class="card reveal" style="animation-delay:${i*55}ms"><div class="card-media"><span class="tag">${esc(d.badge||d.region)}</span>${favButton(d.id)}<img src="${asset(d.image)}" alt="${esc(d.name)}" loading="lazy"></div><div class="card-body"><div class="meta">${esc(d.region)}</div><h3>${esc(d.name)}</h3><p class="meta">${esc(d.description)}</p><div class="price">${esc(d.price)}</div><div class="card-actions single"><a class="btn btn-dark" href="${route('destination','?id='+encodeURIComponent(d.id))}">Découvrir ${icon('arrow')}</a></div></div></article>`).join('')}
 function offerCards(items){if(!items.length)return '<div class="empty">Aucun voyage disponible pour le moment.</div>';return items.map((o,i)=>`<article class="card reveal" style="animation-delay:${i*55}ms"><div class="card-media">${o.is_promo?`<span class="promo-ribbon">${v14Discount(o)?'-'+v14Discount(o)+'% · ':''}PROMO</span>`:''}<span class="tag">${esc(o.badge||o.date||'Voyage')}</span>${favButton(o.id)}<img src="${asset(o.image)}" alt="${esc(o.title)}" loading="lazy"></div><div class="card-body"><div class="meta">${esc(o.date||o.duration||'Voyage')}</div><h3>${esc(o.title)}</h3><p class="meta">${esc(o.subtitle||'')}</p>${v14Price(o)}<div class="card-actions single"><a class="btn btn-dark" href="${route('voyage','?id='+encodeURIComponent(o.id))}">Découvrir ${icon('arrow')}</a></div></div></article>`).join('')}
 function postCards(items){items=(items||[]).filter(active);if(!items.length)return '<div class="empty">Aucune actualité publiée pour le moment.</div>';return items.map(p=>`<article class="card reveal"><div class="card-media"><span class="tag">${esc(p.date)}</span><img src="${asset(p.image)}" alt="${esc(p.title)}" loading="lazy"></div><div class="card-body"><h3>${esc(p.title)}</h3><p class="meta">${esc(p.text)}</p><div class="card-actions single"><a class="btn btn-dark" href="${postHref(p)}">Découvrir ${icon('arrow')}</a></div></div></article>`).join('')}
+
+// =========================
+// V18.1 — recherche Voyages
+// =========================
+function offers(){
+  $('#app').innerHTML=shell('Voyages','offers',`${pageHero('Nos voyages','Des séjours concrets à découvrir.','Recherchez un voyage par destination, titre, période ou mot-clé.')}<section class="section"><div class="container"><div class="filters-panel voyage-search-panel"><div class="filters-grid voyage-search-grid"><div class="filter-control voyage-search-main"><label for="voyageFilterQ">Rechercher un voyage</label><input id="voyageFilterQ" type="search" placeholder="Ex. Le Caire, Omra, Istanbul…" autocomplete="off" oninput="filteredVoyages()"></div><button class="btn btn-light" type="button" onclick="resetVoyageSearch()">Réinitialiser</button></div></div><div class="results-line"><strong>Nos voyages</strong><span id="voyageCount" class="results-count"></span></div><div class="grid grid-3" id="voyageGrid"></div></div></section><section class="section soft"><div class="container"><div class="banner"><div><h3>Vous cherchez une autre destination ?</h3><p>Parlez-nous de vos dates et de vos envies : nous étudions votre projet.</p></div><a class="btn btn-light" href="${route('contact')}">Créer ma demande ${icon('arrow')}</a></div></div></section>`)
+  filteredVoyages()
+}
+function filteredVoyages(){
+  const input=$('#voyageFilterQ');
+  const q=(input?.value||'').trim().toLocaleLowerCase('fr');
+  const items=visibleOffers().filter(o=>{
+    const d=visibleDestinations().find(x=>x.id===o.destinationId);
+    const ranges=(o.dateRanges||[]).map(dateRangeLabel).join(' ');
+    const hay=[o.title,o.subtitle,o.text,o.date,o.duration,o.badge,o.departure,d?.name,d?.region,ranges,...(o.highlights||[])].filter(Boolean).join(' ').toLocaleLowerCase('fr');
+    return !q||hay.includes(q)
+  });
+  const grid=$('#voyageGrid'); if(grid)grid.innerHTML=offerCards(items);
+  const count=$('#voyageCount'); if(count)count.textContent=`${items.length} voyage${items.length>1?'s':''}`
+}
+function resetVoyageSearch(){const q=$('#voyageFilterQ');if(q){q.value='';q.focus()}filteredVoyages()}
