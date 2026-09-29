@@ -199,3 +199,21 @@ function resetVoyageFilters(){
   ['voyageFilterQ','voyageFilterType','voyageFilterBudget','voyageFilterFav'].forEach(id=>{const e=$('#'+id);if(e)e.value=''});
   filteredVoyages();
 }
+
+// =========================
+// V18.6 — coordonnées agence + réseaux sociaux sur la page Agence
+// =========================
+const NAT_AGENCY_ADDRESS='212 Avenue de la Capelette, 13010 Marseille';
+const NAT_AGENCY_MAP_URL='https://www.bing.com/maps?mepi=0~~Embedded~Address_Link&ty=18&q=New%20Age%20Travel%20Marseille&ss=ypid.YN2D133672AC1BB961&ppois=43.27962875366211_5.410359859466553_New%20Age%20Travel%20Marseille_YN2D133672AC1BB961~&cp=43.279629~5.41036&v=2&sV=1&FORM=MPSRPL';
+function ensureAgencyContact(){
+  if(!DATA.agency) DATA.agency={};
+  DATA.agency.address=NAT_AGENCY_ADDRESS;
+  DATA.agency.addressUrl=NAT_AGENCY_MAP_URL;
+  DATA.agency.phone=DATA.agency.phone||'04 65 85 93 50';
+  DATA.agency.phoneHref=DATA.agency.phoneHref||'+33465859350';
+  DATA.agency.socials=DATA.agency.socials||{};
+}
+function agency(){
+  ensureAgencyContact();
+  $('#app').innerHTML=shell('L’agence','agency',`${pageHero('Notre agence','New Age Travel','Retrouvez nos coordonnées et échangez avec notre équipe pour préparer votre prochain voyage.')}<section class="section"><div class="container contact"><div class="info-box contact-card"><div class="kicker">Nous rencontrer</div><h2>New Age Travel</h2><p>${icon('pin')} <a href="${esc(DATA.agency.addressUrl)}" target="_blank" rel="noopener noreferrer">${esc(DATA.agency.address)}</a></p><p>${icon('phone')} <a href="tel:${esc(DATA.agency.phoneHref)}">${esc(DATA.agency.phone)}</a></p>${socialLinks()}<a class="btn btn-light" href="${route('contact')}">Préparer mon voyage ${icon('arrow')}</a></div><div class="info-box"><div class="kicker">Notre approche</div><h2>Un accompagnement simple et humain.</h2><p class="lead">Nous vous accompagnons dans la préparation de votre séjour, depuis le choix de la destination jusqu’aux informations utiles avant votre départ.</p><div class="trust" style="grid-template-columns:1fr;margin-top:20px"><div class="trust-item"><strong>Une équipe à votre écoute</strong><span class="meta">Un point de contact dédié pour votre projet.</span></div><div class="trust-item"><strong>Des voyages à personnaliser</strong><span class="meta">Découvrez les destinations, périodes et programmes puis adaptez votre demande à vos envies.</span></div></div></div></div></section>`);
+}
