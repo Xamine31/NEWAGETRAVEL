@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /administration/
+Sitemap: https://www.newagetravel.fr/sitemap.xml
