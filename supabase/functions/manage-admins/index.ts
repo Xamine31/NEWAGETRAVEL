@@ -91,22 +91,24 @@ Deno.serve(async (req) => {
     if (action === 'email') {
       const targetId = String(body.user_id || '').trim()
       const email = String(body.email || '').trim().toLowerCase()
-      if (!targetId) return json({ error: 'Compte introuvable', stage: 'email' }, 400)
-      if (!email || !email.includes('@')) return json({ error: 'Adresse e-mail invalide', stage: 'email' }, 400)
+      if (!targetId || !email || !email.includes('@')) return json({ error: 'Compte ou adresse e-mail invalide', stage: 'email' }, 400)
 
       const { data: target, error: targetError } = await admin
-        .from('profiles').select('role').eq('user_id', targetId).maybeSingle()
+        .from('profiles').select('user_id,role,email').eq('user_id', targetId).maybeSingle()
       if (targetError) throw new Error(`Vérification du compte : ${targetError.message}`)
-      if (!target) return json({ error: 'Compte administrateur introuvable', stage: 'email' }, 404)
+      if (!target) return json({ error: 'Compte administrateur introuvable', stage: 'email-target' }, 404)
 
-      const { error: authError } = await admin.auth.admin.updateUserById(targetId, { email, email_confirm: true })
-      if (authError) throw new Error(`Modification de l’adresse e-mail : ${authError.message}`)
+      const { data: authData, error: authError } = await admin.auth.admin.updateUserById(targetId, { email })
+      if (authError) return json({ error: `Modification Auth impossible : ${authError.message}`, stage: 'email-auth' }, 400)
+
+      const authEmail = authData.user?.email || ''
+      if (authEmail.toLowerCase() !== email.toLowerCase()) {
+        return json({ error: `Supabase Auth n'a pas enregistré la nouvelle adresse. Adresse Auth retournée : ${authEmail}`, stage: 'email-verification' }, 500)
+      }
 
       const { error: profileUpdateError } = await admin.from('profiles').update({ email }).eq('user_id', targetId)
-      if (profileUpdateError) {
-        return json({ error: `Adresse Auth modifiée mais profil non synchronisé : ${profileUpdateError.message}`, stage: 'email-profile' }, 500)
-      }
-      return json({ ok: true, email })
+      if (profileUpdateError) return json({ error: `L'adresse Auth a été modifiée mais le profil n'a pas pu être synchronisé : ${profileUpdateError.message}`, stage: 'email-profile' }, 500)
+      return json({ ok: true, email: authEmail, user_id: authData.user.id })
     }
 
     if (action === 'delete') {
