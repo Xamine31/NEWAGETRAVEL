@@ -79,3 +79,9 @@ Une seule demande client déclenche deux e-mails :
 2. une confirmation au client ; son bouton Répondre cible l’adresse de réception configurée dans Administration > Paramètres.
 
 Si Resend est temporairement indisponible, la demande reste enregistrée dans `quote_requests` afin de ne pas perdre le prospect.
+
+## Favicon Google — mise à jour
+- Ajout de `favicon.ico`, `favicon-48.png`, `favicon-96.png` et `favicon-192.png` à partir du logo New Age Travel existant.
+- Déclaration du favicon sur toutes les pages HTML, y compris les routes propres imbriquées.
+- URL stable à la racine du domaine pour faciliter la récupération par Google.
+- Après publication, demander une nouvelle indexation de `https://www.newagetravel.fr/` dans Google Search Console. L'affichage du nouveau favicon dans les résultats Google dépend ensuite du prochain crawl de Google.
