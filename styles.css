@@ -507,3 +507,21 @@ input,select,textarea,button{max-width:100%}
 }
 /* V18.20 : l'animation concerne le texte, pas toute l'image. */
 .promo-slider{animation:none!important}
+
+
+/* V18.21 — styles individuels du texte d'accueil + prix dynamique */
+.nat-hero-text{font-family:var(--nat-text-font,inherit)!important;color:var(--nat-text-color,inherit)!important;will-change:transform,opacity}
+.nat-hero-none{animation:none!important}
+.nat-hero-fade{animation:natHeroFade .75s ease both}
+.nat-hero-slide{animation:natHeroSlide .8s cubic-bezier(.2,.8,.2,1) both}
+.nat-hero-zoom{animation:natHeroZoom .75s ease both}
+.nat-hero-rise{animation:natHeroRise .8s cubic-bezier(.2,.8,.2,1) both}
+.hero .nat-hero-text:nth-child(2){animation-delay:.08s}
+.hero .nat-hero-text:nth-child(3){animation-delay:.16s}
+@keyframes natHeroFade{from{opacity:0}to{opacity:1}}
+@keyframes natHeroSlide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@keyframes natHeroZoom{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes natHeroRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#voyageDynamicPrice{transition:transform .2s ease,opacity .2s ease}
+#voyageDynamicPrice.price-updated{transform:scale(1.035);opacity:.82}
+@media (prefers-reduced-motion:reduce){.nat-hero-text{animation:none!important}.price-updated{transform:none!important}}

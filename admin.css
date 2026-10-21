@@ -70,3 +70,12 @@ button.primary,.btn-primary,.admin-btn-primary{background:linear-gradient(110deg
 .admin-color-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .admin-field input[type="color"]{height:46px;padding:4px;cursor:pointer}
 @media(max-width:560px){.admin-color-row{grid-template-columns:1fr}.admin-style-preview strong{font-size:21px}}
+
+
+/* V18.21 — réglages texte et prix par période */
+.admin-hero-text-setting{padding:18px;border:1px solid #e4ebf5;border-radius:16px;background:#f8fbff;margin-bottom:16px}
+.admin-text-style{margin-top:12px;padding-top:12px;border-top:1px dashed #d7e2f0}
+.admin-fields-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.admin-date-price-row{grid-template-columns:minmax(145px,1fr) minmax(145px,1fr) minmax(140px,.9fr) minmax(140px,.8fr) auto!important;align-items:end}
+@media(max-width:900px){.admin-fields-3{grid-template-columns:1fr}.admin-date-price-row{grid-template-columns:1fr 1fr!important}.admin-date-price-row .admin-btn{grid-column:1/-1}}
+@media(max-width:560px){.admin-date-price-row{grid-template-columns:1fr!important}}
