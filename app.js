@@ -254,3 +254,27 @@ function destinations(){const u=new URLSearchParams(location.search);$('#app').i
 function resetFilters(){['filterQ','filterType','filterBudget','filterFav','filterStart','filterEnd'].forEach(id=>{const e=$('#'+id);if(e)e.value=''});filteredDest()}
 function filteredOffers(){const q=($('#offerFilterQ')?.value||'').toLowerCase(),budget=Number($('#offerFilterBudget')?.value||0),start=$('#offerFilterStart')?.value||'',end=$('#offerFilterEnd')?.value||'';const items=visibleOffers().filter(o=>(!q||[o.title,o.subtitle].join(' ').toLowerCase().includes(q))&&(!budget||!o.priceValue||o.priceValue<=budget)&&natOfferMatchesDates(o,start,end));$('#offerGrid').innerHTML=offerCards(items);$('#offerCount').textContent=`${items.length} résultat${items.length>1?'s':''}`}
 function offers(){const u=new URLSearchParams(location.search);$('#app').innerHTML=shell('Voyages','offers',`${pageHero('Nos voyages','Des séjours concrets à réserver.','Prix, durée, dates, programme et demande de devis : retrouvez ici les offres publiées par l’agence.')}<section class="section"><div class="container"><div class="filters-panel"><div class="filters-grid"><div class="filter-control"><label>Rechercher</label><input id="offerFilterQ" value="${esc(u.get('q')||'')}" placeholder="Voyage, destination…" oninput="filteredOffers()"></div><div class="filter-control"><label>Départ souhaité</label><input id="offerFilterStart" type="date" value="${esc(u.get('start')||'')}" onchange="filteredOffers()"></div><div class="filter-control"><label>Retour souhaité</label><input id="offerFilterEnd" type="date" value="${esc(u.get('end')||'')}" onchange="filteredOffers()"></div><div class="filter-control"><label>Budget maximum</label><select id="offerFilterBudget" onchange="filteredOffers()"><option value="">Tous budgets</option><option value="1000">1 000 €</option><option value="1500">1 500 €</option><option value="2000">2 000 €</option></select></div></div></div><div class="results-line"><strong>Nos voyages</strong><span id="offerCount" class="results-count"></span></div><div class="grid grid-3" id="offerGrid"></div></div></section>`);if(u.get('budget'))$('#offerFilterBudget').value=u.get('budget');filteredOffers()}
+
+// V18.20 — promos configurables et affichage d'images sans recadrage.
+function natPromoChoice(value, allowed, fallback){return allowed.includes(value)?value:fallback}
+function natPromoColor(value,fallback){return /^#[0-9a-f]{6}$/i.test(String(value||''))?String(value):fallback}
+function natPromoConfig(){
+  const h=DATA?.homepageContent||{};
+  const animation=natPromoChoice(h.promo_animation,['fade','slide','zoom','rise'],'slide');
+  const fontKey=natPromoChoice(h.promo_font,['modern','elegant','friendly','impact'],'modern');
+  const fonts={
+    modern:'Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif',
+    elegant:'Georgia,"Times New Roman",serif',
+    friendly:'"Trebuchet MS",Verdana,Arial,sans-serif',
+    impact:'Impact,"Arial Black",Arial,sans-serif'
+  };
+  return {animation,font:fonts[fontKey],text:natPromoColor(h.promo_text_color,'#ffffff'),accent:natPromoColor(h.promo_accent_color,'#ffd166')};
+}
+function promoSlider(){
+  let items=visibleOffers().filter(x=>x.is_promo).sort((a,b)=>(a.promo_sort_order||0)-(b.promo_sort_order||0));
+  if(!items.length)items=visibleOffers().slice(0,1);
+  if(!items.length)return `<div class="hero-card"><img src="${asset('assets/cairo.jpg')}" alt="Voyage"></div>`;
+  const cfg=natPromoConfig();
+  const style=`--promo-font:${cfg.font};--promo-text:${cfg.text};--promo-accent:${cfg.accent}`;
+  return `<div class="promo-slider anim-${cfg.animation}" id="promoSlider" data-index="0" style="${esc(style)}">${items.map((o,i)=>`<a class="promo-slide ${i===0?'active':''}" href="${route('voyage','?id='+encodeURIComponent(o.id))}"><span class="hero-feature-label">${v14Discount(o)?'-'+v14Discount(o)+'% · ':''}Promotion</span><img src="${asset(o.image)}" alt="${esc(o.title)}" loading="${i===0?'eager':'lazy'}" decoding="async"><div class="hero-float"><strong>${esc(o.title)}</strong><small>${o.is_promo&&o.promo_price?`<span class="old-price">${esc(o.price)}</span><span class="promo-price">${esc(o.promo_price)}</span>`:esc(o.price||o.date||'')}</small></div></a>`).join('')}${items.length>1?`<button class="promo-prev" onclick="event.preventDefault();promoMove(-1)" aria-label="Promotion précédente">‹</button><button class="promo-next" onclick="event.preventDefault();promoMove(1)" aria-label="Promotion suivante">›</button><div class="promo-dots">${items.map((_,i)=>`<button class="${i===0?'active':''}" onclick="event.preventDefault();promoSet(${i})" aria-label="Promotion ${i+1}"></button>`).join('')}</div>`:''}</div>`;
+}

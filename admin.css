@@ -61,3 +61,12 @@ button.primary,.btn-primary,.admin-btn-primary{background:linear-gradient(110deg
 .admin-sidebar{background:radial-gradient(circle at 20% 5%,rgba(8,191,208,.20),transparent 20%),linear-gradient(180deg,#031f44,#064d98 70%,#087aaf)}
 .admin-main{background:radial-gradient(circle at 90% 8%,rgba(255,189,63,.12),transparent 20%),linear-gradient(145deg,#f4faff,#f5f1ff 50%,#fff8e9)}
 .admin-card{border-color:rgba(8,111,232,.10)}.admin-btn-primary{background:linear-gradient(115deg,#086fe8,#08bfd0)}
+
+/* V18.20 — réglages promo + aperçu images sans recadrage */
+.admin-image-preview img,.admin-gallery-item img,.preview-post img,.pub-cell img{object-fit:contain!important;background:#eef4f9}
+.admin-style-preview{border:1px solid #dfe7f0;border-radius:16px;padding:18px;background:linear-gradient(145deg,#052c5c,#0877d8);color:#fff;margin:10px 0 18px;overflow:hidden}
+.admin-style-preview strong{display:block;font-size:24px;line-height:1.05}
+.admin-style-preview small{display:block;margin-top:6px;font-weight:800}
+.admin-color-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.admin-field input[type="color"]{height:46px;padding:4px;cursor:pointer}
+@media(max-width:560px){.admin-color-row{grid-template-columns:1fr}.admin-style-preview strong{font-size:21px}}
