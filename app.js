@@ -286,11 +286,11 @@ function promoSlider(){
 function natTextStyle(prefix,defaults={animation:'fade',font:'modern',color:'#ffffff',color2:'#ffd166',speed:'normal',repeat:'once',intensity:'visible'}){
   const h=DATA?.homepageContent||{};
   const animation=natPromoChoice(h[`${prefix}_animation`],['none','fade','slide','zoom','rise','pulse','float','shine','blink','gradient','sway'],defaults.animation);
-  const fontKey=natPromoChoice(h[`${prefix}_font`],['modern','elegant','friendly','impact'],defaults.font);
+  const legacyFonts={modern:'poppins',elegant:'playfair',friendly:'outfit',impact:'bebas'}; const requestedFont=legacyFonts[h[`${prefix}_font`]]||h[`${prefix}_font`]; const defaultFont=legacyFonts[defaults.font]||defaults.font||'poppins'; const fontKey=natPromoChoice(requestedFont,['poppins','montserrat','manrope','outfit','raleway','dmsans','urbanist','jakarta','playfair','cormorant','baskerville','cinzel','oswald','bebas','abril'],defaultFont);
   const speed=natPromoChoice(h[`${prefix}_speed`],['slow','normal','fast'],defaults.speed||'normal');
   const repeat=natPromoChoice(h[`${prefix}_repeat`],['once','loop'],defaults.repeat||'once');
   const intensity=natPromoChoice(h[`${prefix}_intensity`],['soft','visible','strong'],defaults.intensity||'visible');
-  const fonts={modern:'Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif',elegant:'Georgia,"Times New Roman",serif',friendly:'"Trebuchet MS",Verdana,Arial,sans-serif',impact:'Impact,"Arial Black",Arial,sans-serif'};
+  const fonts={poppins:'Poppins,Arial,sans-serif',montserrat:'Montserrat,Arial,sans-serif',manrope:'Manrope,Arial,sans-serif',outfit:'Outfit,Arial,sans-serif',raleway:'Raleway,Arial,sans-serif',dmsans:'"DM Sans",Arial,sans-serif',urbanist:'Urbanist,Arial,sans-serif',jakarta:'"Plus Jakarta Sans",Arial,sans-serif',playfair:'"Playfair Display",Georgia,serif',cormorant:'"Cormorant Garamond",Georgia,serif',baskerville:'"Libre Baskerville",Georgia,serif',cinzel:'Cinzel,Georgia,serif',oswald:'Oswald,Arial,sans-serif',bebas:'"Bebas Neue",Impact,sans-serif',abril:'"Abril Fatface",Georgia,serif'};
   const durations={slow:'4.2s',normal:'3s',fast:'1.9s'};
   const intensityVars={soft:{distance:'5px',scale:'1.025',opacity:'.78',rotate:'1deg'},visible:{distance:'10px',scale:'1.055',opacity:'.6',rotate:'2deg'},strong:{distance:'16px',scale:'1.09',opacity:'.42',rotate:'3.5deg'}};
   const iv=intensityVars[intensity];
