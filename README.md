@@ -1,55 +1,16 @@
-# New Age Travel — Ultime V9 Supabase Ready
+# notify-quote-request — V18.14
 
-Cette version garde le site public de la V8 et ajoute la vraie couche Supabase :
+Edge Function publique appelée par le formulaire de devis.
 
-- authentification administrateur par Supabase Auth ;
-- vérification du rôle `admin` ;
-- RLS sur toutes les tables ;
-- CRUD Destinations / Voyages / Publications ;
-- changement du mot de passe administrateur via Supabase Auth ;
-- demandes de devis enregistrées dans `quote_requests` ;
-- consultation et statut des demandes dans l'administration ;
-- mode de secours local tant que Supabase n'est pas configuré.
+Elle :
+1. enregistre la demande dans `quote_requests` ;
+2. lit l'adresse de réception dans `agency_private_settings` ;
+3. envoie une notification via Resend ;
+4. n'envoie aucun e-mail automatique au client.
 
-## Mise en route Supabase
+Secrets nécessaires :
+- `RESEND_API_KEY` (obligatoire pour l'e-mail)
+- `RESEND_FROM_EMAIL` (optionnel, défaut : `New Age Travel <notifications@newagetravel.fr>`)
+- `AGENCY_NOTIFICATION_EMAIL` (optionnel, secours ; l'adresse configurée dans l'admin est prioritaire)
 
-1. Crée un projet Supabase.
-2. Ouvre `SQL Editor` et exécute `supabase/schema.sql`.
-3. Exécute ensuite `supabase/seed.sql` pour importer les données actuelles du site.
-4. Dans `Authentication > Users`, crée le compte administrateur avec son e-mail et son mot de passe.
-5. Dans `supabase/promote-admin.sql`, remplace `admin@agence.fr` par l'e-mail du compte puis exécute le script dans SQL Editor.
-6. Dans Supabase, récupère l'URL du projet et la clé publique `anon`/`publishable`.
-7. Ouvre `supabase-config.js` et remplace les deux valeurs d'exemple.
-8. Publie le dossier sur GitHub Pages.
-
-## Administration
-
-Accès : `/administration/`
-
-Ne mets jamais une clé `service_role`, un mot de passe de base de données ou une autre clé secrète dans `supabase-config.js` ou GitHub.
-
-## Prévisualisation locale
-
-Avec VS Code + Live Server, ouvre `index.html` ou lance :
-
-```bash
-python -m http.server 5500
-```
-
-Puis : `http://localhost:5500/`
-
-Administration : `http://localhost:5500/administration/`
-
-## Images depuis l'administration
-La V11 utilise le bucket Supabase Storage `site-images`. Pour un projet Supabase déjà configuré avec la V10, exécuter une seule fois `supabase/storage.sql` dans SQL Editor. Ensuite les formulaires Destinations, Voyages et Publications permettent l'import direct d'images. La galerie des voyages accepte plusieurs fichiers.
-
-
-## Mise à la une (V12)
-Pour une base Supabase déjà configurée en V11, exécuter `supabase/featured-home.sql` une seule fois. L’administration permet ensuite de choisir un seul voyage ou une seule publication à afficher dans le visuel principal de l’accueil.
-
-
-## V12.3 — À la une depuis les listes
-- La case **À la une** est directement visible dans les listes **Destinations** et **Voyages**.
-- Une seule case peut être active à la fois, même entre les deux listes.
-- Les publications ne peuvent plus être mises à la une.
-- Si V12 featured-home.sql a déjà été exécuté, exécuter `supabase/featured-home-v12.3.sql` une fois.
+Déployer la fonction `notify-quote-request`. Pour permettre l'appel depuis le formulaire public, désactiver la vérification JWT héritée si l'éditeur Supabase affiche cette option. La fonction ne donne aucun accès admin et utilise la service role uniquement côté serveur.
