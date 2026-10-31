@@ -606,3 +606,33 @@ input,select,textarea,button{max-width:100%}
   .promo-slide .nat-promo-badges{top:49px;left:10px;right:10px;width:calc(100% - 20px);column-gap:7px;row-gap:7px}
   .promo-slide .nat-promo-badges .nat-badge{padding:5px 8px;font-size:10px}
 }
+
+
+/* V18.28 — Les badges ne chevauchent plus le bandeau PROMO sur les cartes. */
+.card-media{position:relative}
+.card-media .promo-ribbon{
+  position:absolute;z-index:6;top:12px;left:12px;right:auto;
+  max-width:calc(100% - 66px);width:max-content;
+  white-space:normal;line-height:1.35;overflow-wrap:anywhere;
+}
+.card-media .nat-badges{
+  position:absolute;z-index:5;top:12px;left:12px;right:52px;
+  width:auto;max-width:none;display:flex;flex-direction:row;flex-wrap:wrap;
+  justify-content:flex-start;align-items:flex-start;align-content:flex-start;
+  gap:8px;pointer-events:none;
+}
+/* Les cartes promotionnelles réservent la première ligne au bandeau PROMO. */
+.card-media:has(> .promo-ribbon) > .nat-badges{top:57px}
+.card-media .nat-badges > .nat-badge{
+  position:relative;top:auto;left:auto;right:auto;bottom:auto;
+  flex:0 1 auto;width:max-content;max-width:100%;min-width:0;
+  margin:0;white-space:normal;overflow-wrap:anywhere;text-align:center;
+}
+/* Même principe sur la grande promotion de l'accueil. */
+.promo-slide .nat-promo-badges{gap:8px;flex-wrap:wrap}
+@media(max-width:600px){
+ .card-media .promo-ribbon{top:10px;left:10px;max-width:calc(100% - 56px);padding:6px 9px;font-size:10px}
+ .card-media .nat-badges{top:10px;left:10px;right:44px;gap:6px}
+ .card-media:has(> .promo-ribbon) > .nat-badges{top:49px}
+ .card-media .nat-badges > .nat-badge{font-size:10px;padding:5px 8px}
+}
