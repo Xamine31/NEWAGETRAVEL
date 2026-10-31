@@ -584,3 +584,25 @@ input,select,textarea,button{max-width:100%}
 
 .voyage-summary>.nat-badges{display:flex;margin:9px 0 14px;gap:8px;justify-content:flex-start}
 .voyage-summary>.nat-badges .nat-badge{font-size:12px}
+
+/* V18.27 — Promotions : bandeau et badges sur des lignes séparées */
+.promo-slide .hero-feature-label{top:14px;left:14px;right:auto;max-width:calc(100% - 28px);white-space:normal}
+.promo-slide .nat-promo-badges{
+  position:absolute;z-index:5;top:58px;left:14px;right:14px;
+  width:calc(100% - 28px);max-width:none;
+  display:flex;flex-direction:row;flex-wrap:wrap;
+  align-items:flex-start;justify-content:flex-start;
+  align-content:flex-start;column-gap:9px;row-gap:9px;
+  pointer-events:none;
+}
+.promo-slide .nat-promo-badges .nat-badge{
+  position:relative;inset:auto;flex:0 1 auto;min-width:0;
+  width:max-content;max-width:100%;height:auto;
+  margin:0;white-space:normal;overflow-wrap:anywhere;
+  line-height:1.25;text-align:center;
+}
+@media(max-width:600px){
+  .promo-slide .hero-feature-label{top:10px;left:10px;max-width:calc(100% - 20px)}
+  .promo-slide .nat-promo-badges{top:49px;left:10px;right:10px;width:calc(100% - 20px);column-gap:7px;row-gap:7px}
+  .promo-slide .nat-promo-badges .nat-badge{padding:5px 8px;font-size:10px}
+}
