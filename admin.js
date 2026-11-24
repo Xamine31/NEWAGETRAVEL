@@ -422,6 +422,14 @@ function sbSettings(){
   const titleStyle=natAdminStyleChoices(h,'hero_title_style',{animation:'slide',font:'modern',color:'#ffffff'});
   const textStyle=natAdminStyleChoices(h,'hero_text_style',{animation:'rise',font:'modern',color:'#ffffff'});
   $('#adminContent').innerHTML=`<div class="admin-head"><div><div class="kicker">Site & agence</div><h2>Paramètres</h2><p class="muted">Modifiez les textes de l’accueil, leur style, les réseaux sociaux et l’adresse de notification.</p></div></div><form class="admin-card admin-form" id="socialForm">
+  <section class="nat-home-selection" id="nat-home-selection" aria-labelledby="nat-home-selection-heading">
+    <h3 id="nat-home-selection-heading">Accueil — choix et ordre d’affichage</h3>
+    <p class="muted">Sélectionnez les destinations et les voyages à mettre en avant sur la page d’accueil. La position 1 apparaît en premier. Jusqu’à 6 éléments de chaque type.</p>
+    <div class="admin-card admin-subcard"><h3>Destinations affichées sur l’accueil</h3>${natAdminFeaturedSelectors('home_destination_id',SBCACHE.destinations.filter(x=>x.active!==false),h.home_destinations)}</div>
+    <div class="admin-card admin-subcard"><h3>Voyages affichés sur l’accueil</h3>${natAdminFeaturedSelectors('home_voyage_id',SBCACHE.voyages.filter(x=>x.active!==false),h.home_voyages)}</div>
+    <p class="muted">Les promotions du carrousel sont gérées séparément dans Administration → Voyages.</p>
+  </section>
+  <hr style="border:0;border-top:1px solid #e7edf6;margin:24px 0">
   <h3>Textes de la page d’accueil</h3>
   <div class="admin-field admin-hero-text-setting"><label>Petit titre au-dessus du titre principal</label><input name="eyebrow" value="${esc(h.eyebrow||'New Age Travel · Marseille')}">${natAdminTextStyleBlock('eyebrow',eyebrowStyle)}<div class="nat-font-preview" data-nat-font-preview="eyebrow"></div></div>
   <div class="admin-field admin-hero-text-setting"><label>Titre principal</label><input name="hero_title" value="${esc(h.hero_title||'Votre prochain voyage commence ici.')}">${natAdminTextStyleBlock('hero_title_style',titleStyle)}<div class="nat-font-preview nat-font-preview-title" data-nat-font-preview="hero_title"></div></div>

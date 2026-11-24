@@ -317,14 +317,12 @@ function natArticle(){
   const id=new URLSearchParams(location.search).get('id');
   const p=(DATA.posts||[]).filter(active).find(x=>String(x.id)===String(id));
   if(!p){$('#app').innerHTML=shell('Actualité introuvable','posts',`<section class="section"><div class="container"><h1>Cette publication n’est plus disponible.</h1><a class="btn btn-dark" href="${route('actualites')}">Toutes les actualités</a></div></section>`);return}
-  const voyage=visibleOffers().find(x=>x.id===p.offerId);
-  const destination=visibleDestinations().find(x=>x.id===p.destinationId);
   document.querySelector('meta[name="description"]')?.setAttribute('content',String(p.text||'').replace(/\s+/g,' ').slice(0,155));
   document.querySelector('link[rel="canonical"]')?.setAttribute('href',location.origin+location.pathname+'?id='+encodeURIComponent(p.id));
   document.querySelector('meta[property="og:title"]')?.setAttribute('content',p.title+' | New Age Travel');
   document.querySelector('meta[property="og:image"]')?.setAttribute('content',asset(p.image));
 
-  $('#app').innerHTML=shell(p.title,'posts',`<article class="section nat-article"><div class="container nat-article-container"><a class="nat-article-back" href="${route('actualites')}">← Retour aux actualités</a><div class="kicker">Actualités · ${esc(p.date||'New Age Travel')}</div><h1>${esc(p.title)}</h1><figure class="nat-article-photo"><img src="${asset(p.image)}" alt="${esc(p.title)}" loading="eager" decoding="async"></figure><div class="nat-article-body">${esc(p.text||'').replace(/\r?\n/g,'<br>')}</div><div class="nat-article-actions">${voyage?`<a class="btn btn-dark" href="${route('voyage','?id='+encodeURIComponent(voyage.id))}">Découvrir le voyage ${icon('arrow')}</a>`:''}${destination?`<a class="btn btn-light" href="${route('destination','?id='+encodeURIComponent(destination.id))}">Voir la destination ${icon('arrow')}</a>`:''}</div></div></article>`);
+  $('#app').innerHTML=shell(p.title,'posts',`<article class="section nat-article"><div class="container nat-article-container"><a class="nat-article-back" href="${route('actualites')}">← Retour aux actualités</a><div class="kicker">Actualités · ${esc(p.date||'New Age Travel')}</div><h1>${esc(p.title)}</h1><figure class="nat-article-photo"><img src="${asset(p.image)}" alt="${esc(p.title)}" loading="eager" decoding="async"></figure><div class="nat-article-body">${esc(p.text||'').replace(/\r?\n/g,'<br>')}</div><div class="nat-article-actions"><a class="btn btn-dark" href="${route('contact')}">Nous contacter ${icon('arrow')}</a></div></div></article>`);
 }
 function natHomeItems(type,all){
   const key=type==='destination'?'home_destinations':'home_voyages';
